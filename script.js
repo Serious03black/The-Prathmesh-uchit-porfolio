@@ -1,9 +1,9 @@
 function init() {
     gsap.registerPlugin(ScrollTrigger);
-
     const locoScroll = new LocomotiveScroll({
         el: document.querySelector(".main"),
-        smooth: true
+        smooth: true,
+        lerp:0.1
     });
     locoScroll.on("scroll", ScrollTrigger.update);
 
@@ -16,30 +16,30 @@ function init() {
         },
         pinType: document.querySelector(".main").style.transform ? "transform" : "fixed"
     });
-
-
-    ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
-
-    ScrollTrigger.refresh();
-
 }
-
 init()
-
 var crsr = document.querySelector(".cursor")
 var main = document.querySelector(".main")
 document.addEventListener("mousemove",function(dets){
     crsr.style.left = dets.x + 20+"px"
     crsr.style.top = dets.y + 20+"px"
 })
-
-gsap.from(".page1 h1,.page1 h2", {
-    y: 10,
-    rotate: 10,
-    opacity: 0,
-    delay: 0.3,
-    duration: 0.7
-})
+// PAge 1 h1,h2 effect 
+gsap.from(".page1 h1", {
+  y: 10,
+  rotate: 130,
+  opacity: 0,
+  duration: 2,
+  ease: Expo.easeInOut,
+});
+gsap.from(".page1 h2", {
+  y: 10,
+  rotate: -130,
+  opacity: 0,
+  
+  duration: 2,
+  ease: Expo.easeInOut,
+});
 var tl = gsap.timeline({
     scrollTrigger: {
         trigger: ".page1 h1",
@@ -51,21 +51,21 @@ var tl = gsap.timeline({
     }
 })
 tl.to(".page1 h1", {
-    x: -100,
+    x: -1000,
+    Expo:Expo.easeInOut
 }, "anim")
 tl.to(".page1 h2", {
-    x: 100
+    x: 1000
 }, "anim")
 tl.to(".page1 video", {
     width: "90%"
 }, "anim")
-
 var tl2 = gsap.timeline({
     scrollTrigger: {
         trigger: ".page1 h1",
         scroller: ".main",
         // markers:true,
-        start: "top -115%",
+        start: "top 5%",
         end: "top -120%",
         scrub: 3
     }
@@ -73,23 +73,19 @@ var tl2 = gsap.timeline({
 tl2.to(".main", {
     backgroundColor: "#fff",
 })
-
 var tl3 = gsap.timeline({
     scrollTrigger: {
         trigger: ".page1 h1",
         scroller: ".main",
         // markers:true,
-        start: "top -280%",
-        end: "top -300%",
+        start: "top -175%",
+        end: "top -200%",
         scrub: 3
     }
 })
-
 tl3.to(".main",{
     backgroundColor:"#0F0D0D"
 })
-
-
 var boxes = document.querySelectorAll(".box")
 boxes.forEach(function(elem){
     elem.addEventListener("mouseenter",function(){
@@ -107,7 +103,6 @@ boxes.forEach(function(elem){
         crsr.style.backgroundImage = `none`
     })
 })
-
 var h4 = document.querySelectorAll("#nav h4")
 var purple = document.querySelector("#purple")
 h4.forEach(function(elem){
